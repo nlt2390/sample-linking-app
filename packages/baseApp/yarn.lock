@@ -5294,12 +5294,7 @@ p-try@^2.0.0:
 "package-app@file:../packageApp":
   version "0.0.2"
   dependencies:
-    "@react-native-community/masked-view" "0.1.10"
     prop-types "15.7.2"
-    react-native-gesture-handler "1.7.0"
-    react-native-reanimated "1.10.1"
-    react-native-safe-area-context "3.1.1"
-    react-native-screens "2.9.0"
 
 parent-module@^1.0.0:
   version "1.0.1"
