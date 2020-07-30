@@ -1,7 +1,7 @@
 ![](https://raw.githubusercontent.com/nlt2390/sample-linking-app/master/readme/ss1.gif)
 
 An App sample with one base-app linked with other apps :<br>
-_ The Post list screen and Post details screen are in /packages/packageApp
+_ The Post list screen and Post details screen are in /packages/packageApp<br>
 _ The main app to be run is in /packages/baseApp
 
 
