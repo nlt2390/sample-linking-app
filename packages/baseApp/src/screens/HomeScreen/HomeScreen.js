@@ -1,9 +1,17 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { HomeScreenPackage } from 'package-app';
+import { ReactReduxContext } from 'react-redux';
 
-const HomeScreen = ({ navigation }) => {
-  return <HomeScreenPackage navigation={navigation} />;
+const HomeScreen = (props) => {
+  const { navigation } = props;
+
+  return (
+    <ReactReduxContext.Consumer>
+      {({ store }) => {
+        return <HomeScreenPackage navigation={navigation} store={store} />;
+      }}
+    </ReactReduxContext.Consumer>
+  );
 };
 
 export default HomeScreen;

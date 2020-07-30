@@ -1,7 +1,7 @@
 import * as types from './types';
 
 const initState = {
-  posts: {},
+  posts: [],
 };
 
 export default function (state = initState, action) {
@@ -9,6 +9,7 @@ export default function (state = initState, action) {
     case types.FETCH_POSTS_SUCCESS: {
       return {
         ...state,
+        posts: action.payload,
       };
     }
 

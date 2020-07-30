@@ -1,19 +1,27 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-import store from '../../configureStore';
-import { PostList } from './containers';
+import { PostListContainer } from '../../containers';
+import postReducer from '../../state/post';
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <Provider store={store}>
-      <PostList navigation={navigation} />
-    </Provider>
-  );
-};
+class HomeScreen extends React.Component {
+  constructor(props) {
+    super();
+    const { store } = props;
+    if (store) {
+      store.injectReducer('PACKAGE_APP', postReducer);
+    }
+  }
+
+  render() {
+    const { navigation } = this.props;
+
+    return <PostListContainer navigation={navigation} />;
+  }
+}
 
 HomeScreen.propTypes = {
-  navigation: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  navigation: PropTypes.shape({}).isRequired,
 };
 
 export default HomeScreen;

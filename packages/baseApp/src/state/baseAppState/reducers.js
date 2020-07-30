@@ -1,5 +1,5 @@
 const initState = {
-  baseAppState: {},
+  data: {},
 };
 
 export default function (state = initState, action) {

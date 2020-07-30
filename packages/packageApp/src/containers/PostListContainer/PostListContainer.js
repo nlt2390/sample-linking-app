@@ -1,40 +1,58 @@
-import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { actions as postActions } from '../../state/post';
 
-import { postActions } from '../../state/post';
+class PostListContainer extends React.Component {
+  componentDidMount() {
+    const { fetchPosts } = this.props;
 
-const PostListContainer = () => {
-  useEffect(() => {
-    fetchData();
-  }, []);
+    fetchPosts();
+  }
 
-  return (
-    <View>
-      <Text>Post List screen</Text>
-    </View>
-  );
-};
+  render() {
+    const {
+      posts,
+      navigation
+    } = this.props;
+
+    return (
+      <View>
+        {posts.map((post) => {
+          return (
+            <TouchableOpacity
+              key={post.id}
+              onPress={() => navigation.push('PostDetails', {
+                postID: post.id,
+              })}
+            >
+              <Text>{post.id}  {post.title}</Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  }
+}
 
 PostListContainer.propTypes = {
-  navigation: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  fetchData: PropTypes.func,
+  navigation: PropTypes.shape({}).isRequired,
+  fetchPosts: PropTypes.func,
+  posts: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 PostListContainer.defaultProps = {
-  fetchData: () => null,
+  fetchPosts: () => null,
+  posts: [],
 };
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts,
+    posts: state.PACKAGE_APP.posts,
   };
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchPosts: () => dispatch(postActions.actionFetchPosts()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostListContainer);
+export default connect(mapStateToProps, {
+  fetchPosts: postActions.actionFetchPosts,
+})(PostListContainer);
